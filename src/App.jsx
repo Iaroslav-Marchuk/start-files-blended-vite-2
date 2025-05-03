@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Section from './components/Section/Section';
@@ -12,6 +13,7 @@ export const App = () => {
         <Tabs>
           <TabList>
             <Tab>Todos</Tab>
+            <Toaster />
             <Tab>Photos</Tab>
           </TabList>
 
