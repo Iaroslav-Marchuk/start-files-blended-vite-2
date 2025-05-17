@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { nanoid } from 'nanoid';
 
 import Text from '../components/Text/Text';
 import Form from '../components/Form/Form';
@@ -28,16 +29,16 @@ const Todos = () => {
     text: '',
   });
 
-  const fintTodos = text => {
+  const findTodos = text => {
     return todos.some(todo => {
       return todo.text.trim().toLowerCase() === text.trim().toLowerCase();
     });
   };
 
   const addNewTodo = inputValue => {
-    if (!fintTodos(inputValue.text)) {
+    if (!findTodos(inputValue)) {
       setTodos(prevTodos => {
-        return [...prevTodos, inputValue];
+        return [...prevTodos, { id: `id-${nanoid()}`, text: inputValue }];
       });
     } else {
       toast.error('Todo with the same text already exists!');
@@ -78,10 +79,10 @@ const Todos = () => {
           defaultValue={currentTodo.text}
           onUpdate={updateTodo}
           onCancel={cancelUpdate}
-          onCheck={fintTodos}
+          onCheck={findTodos}
         />
       ) : (
-        <Form onAddTodo={addNewTodo} />
+        <Form onSubmit={addNewTodo} />
       )}
 
       {todos.length === 0 ? (

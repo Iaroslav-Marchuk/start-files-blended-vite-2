@@ -10,6 +10,6 @@ axios.defaults.params = {
 
 export const getPhotos = async (query, page) => {
   const { data } = await axios.get(`search?query=${query}&page=${page}`);
-
+  console.log(data);
   return data;
 };
